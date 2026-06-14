@@ -1,13 +1,29 @@
 <h1>Search for flights:</h1>
 <%= form_with url: "/flights", method: :get do |form| %>
     <%= form.label :dep, "From:" %>
-    <%= form.collection_select :dep, Airport.order(:name), :code, :name %>
+    <% if params[:dep] %>
+        <%= form.collection_select :dep, @airports, :code, :name, selected: params[:dep] %>
+    <% else %>
+        <%= form.collection_select :dep, @airports, :code, :name %>
+    <% end %>
     <%= form.label :arr, "To:" %>
-    <%= form.collection_select :arr, Airport.order(:name), :code, :name %>
+    <% if params[:arr] %>
+        <%= form.collection_select :arr, @airports, :code, :name, selected: params[:arr] %>
+    <% else %>
+        <%= form.collection_select :arr, @airports, :code, :name, selected: @airports[1].code %>
+    <% end %>
     <%= form.label :amount, "Ticket amount:" %>
-    <%= form.number_field :amount, value: 1 %>
+    <% if params[:amount] %>
+        <%= form.number_field :amount, value: params[:amount] %>
+    <% else %>
+        <%= form.number_field :amount, value: 1 %>
+    <% end %>
     <%= form.label :day %>
-    <%= form.select :day, @departures %>
+    <% if params[:day] %>
+        <%= form.select :day, @departures, selected: params[:day] %>
+    <% else %>
+        <%= form.select :day, @departures %>
+    <% end %>
     <%= form.submit "Filter" %>
 <% end %>
 <h1>Available flights:</h1>
