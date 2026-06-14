@@ -1,0 +1,12 @@
+<h1>Search for flights:</h1>
+
+<h1>Available flights:</h1>
+<ul>
+    <% @flights.first(10).each do |flight| %>
+        <li>
+            From: <%= flight.departure_airport.name %><br>
+            To: <%= flight.arrival_airport.name %><br>
+            Departure: <%= flight.departure %>
+        </li>
+    <% end %>
+</ul>
