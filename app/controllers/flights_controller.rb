@@ -14,6 +14,5 @@ class FlightsController < ApplicationController
       puts "Got all flights"
     end
     @departures = Flight.all.map { |flight| flight.departure }.map { |departure| departure.strftime("%Y/%m/%d") }.uniq.sort
-    puts params
   end
 end

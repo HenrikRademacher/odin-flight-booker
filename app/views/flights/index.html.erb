@@ -26,13 +26,26 @@
     <% end %>
     <%= form.submit "Filter" %>
 <% end %>
-<h1>Available flights:</h1>
-<ul>
-    <% @flights.first(10).each do |flight| %>
-        <li>
-            From: <%= flight.departure_airport.name %><br>
-            To: <%= flight.arrival_airport.name %><br>
-            Departure: <%= flight.departure %>
-        </li>
+<%= form_with url: "/bookings/new", method: :get do |form| %>
+    <% if params[:amount] %>
+        <%= form.hidden_field :amount, value: params[:amount] %>
+    <% else %>
+        <%= form.hidden_field :amount, value: 1 %>
     <% end %>
-</ul>
+    <h1>Available flights:</h1>
+    <ul>
+        <% @flights.first(10).each do |flight| %>
+            <div class="flight_card">
+                <%= form.radio_button :flight, flight.id %>
+                <label for="flight_<%= flight.id %>">
+                    <li>
+                        From: <%= flight.departure_airport.name %><br>
+                        To: <%= flight.arrival_airport.name %><br>
+                        Departure: <%= flight.departure %>
+                    </li>
+                </label>
+            </div>
+        <% end %>
+    </ul>
+    <%= form.submit "Book flight" %>
+<% end %>
