@@ -1,0 +1,15 @@
+<h1>Book your flight here! </h1>
+
+<h2>Your flight information:</h2>
+<ul>
+    <li>From: <%= @flight.departure_airport.name %></li>
+    <li>To: <%= @flight.arrival_airport.name %></li>
+    <li>Departure: <%= @flight.departure %></li>
+    <li>Duration: <%= @flight.duration %></li>
+</ul>
+<%= form_with url: "/bookings/new", method: :get do |form | %>
+    <%= form.hidden_field :flight, value: @flight.id %>
+    <%= form.label :amount, "Number of passengers:" %>
+    <%= form.number_field :amount, value: params[:amount] %>
+    <%= form.submit "Update amount" %>
+<% end %>
