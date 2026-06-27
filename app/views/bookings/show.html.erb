@@ -1,0 +1,22 @@
+<h1>This is your booking information. </h1>
+
+<h2>Your flight information:</h2>
+<ul>
+    <li>From: <%= @booking.flight.departure_airport.name %></li>
+    <li>To: <%= @booking.flight.arrival_airport.name %></li>
+    <li>Departure: <%= @booking.flight.departure %></li>
+    <li>Duration: <%= @booking.flight.duration %></li>
+</ul>
+
+<h2>Your passenger information:</h2>
+<ul>
+    <% @booking.passengers.each do | passenger | %>
+        <li class="passenger_card">
+            <%= passenger.name %>
+            <br>
+            <%=  passenger.email %>
+        </li>
+    <% end %>
+</ul>
+
+<%= link_to "Back to flights", root_path %>
