@@ -16,3 +16,10 @@ ul {
 .flight_card li {
     padding-left: 1rem;
 }
+
+.passenger_card {
+    margin: 1rem;
+    border: 1px solid darkgray;
+    padding: 0.7rem;
+    border-radius: 4px;
+}
